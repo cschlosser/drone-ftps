@@ -2,7 +2,8 @@ FROM alpine
 
 RUN apk --no-cache add \
         libressl \
-        lftp
+        lftp \
+        bash
 
 ADD upload.sh /bin/
 RUN chmod +x /bin/upload.sh
