@@ -34,5 +34,4 @@ for i in "${in_arr[@]}"; do
     PLUGIN_INCLUDE_STR="$PLUGIN_INCLUDE_STR -x $i"
 done
 
-echo "open -u $PLUGIN_USERNAME,XXXXXX $PLUGIN_HOSTNAME; set ftp:ssl-force $PLUGIN_SECURE; set ftp:ssl-protect-data $PLUGIN_SECURE; mirror -R $PLUGIN_INCLUDE_STR $PLUGIN_EXCLUDE_STR $(pwd)$PLUGIN_SRC_DIR $PLUGIN_DEST_DIR"
-lftp -c "open -u $PLUGIN_USERNAME,$FTP_PASSWORD $PLUGIN_HOSTNAME; set ftp:ssl-force $PLUGIN_SECURE; set ftp:ssl-protect-data $PLUGIN_SECURE; mirror -R $PLUGIN_INCLUDE_STR $PLUGIN_EXCLUDE_STR $(pwd)$PLUGIN_SRC_DIR $PLUGIN_DEST_DIR"
+lftp -c "open ftp://$PLUGIN_USERNAME:$FTP_PASSWORD@$PLUGIN_HOSTNAME; set ftp:ssl-force $PLUGIN_SECURE; set ftp:ssl-protect-data $PLUGIN_SECURE; mirror -R $PLUGIN_INCLUDE_STR $PLUGIN_EXCLUDE_STR $(pwd)$PLUGIN_SRC_DIR $PLUGIN_DEST_DIR"
