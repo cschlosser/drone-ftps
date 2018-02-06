@@ -7,7 +7,7 @@
 
 ## Usage
 
-You have to set the password for your FTP server in the `FTP_PASSWORD` secret.
+You have to set the username and password for your FTP server in the `FTP_USERNAME` and `FTP_PASSWORD` secret.
 
 ### Basic
 
@@ -15,9 +15,8 @@ You have to set the password for your FTP server in the `FTP_PASSWORD` secret.
 pipeline:
   deploy:
     image: cschlosser/drone-ftps
-    username: drone
     hostname: example.com:21
-    secrets: [ ftp_password ]
+    secrets: [ ftp_username, ftp_password ]
 ```
 
 ### Optional settings
@@ -43,9 +42,8 @@ Full file:
 pipeline:
   deploy:
     image: cschlosser/drone-ftps
-    username: drone
     hostname: example.com:21
-    secrets: [ ftp_password ]
+    secrets: [ ftp_username, ftp_password ]
     secure: true
     dest_dir: /var/www/mysite
     src_dir: /mysite/static
