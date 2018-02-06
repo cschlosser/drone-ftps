@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z "$PLUGIN_USERNAME" ]; then
+if [ -z "$FTP_USERNAME" ]; then
     echo "Need to set username"
     exit 1
 fi
@@ -34,4 +34,4 @@ for i in "${in_arr[@]}"; do
     PLUGIN_INCLUDE_STR="$PLUGIN_INCLUDE_STR -x $i"
 done
 
-lftp -c "open -u $PLUGIN_USERNAME,$FTP_PASSWORD $PLUGIN_HOSTNAME; set ftp:ssl-force $PLUGIN_SECURE; set ftp:ssl-protect-data $PLUGIN_SECURE; mirror -R $PLUGIN_INCLUDE_STR $PLUGIN_EXCLUDE_STR $(pwd)$PLUGIN_SRC_DIR $PLUGIN_DEST_DIR"
+lftp -e "set xfer:log 1; set ftp:ssl-force $PLUGIN_SECURE; set ftp:ssl-protect-data $PLUGIN_SECURE; mirror -R $PLUGIN_INCLUDE_STR $PLUGIN_EXCLUDE_STR $(pwd)$PLUGIN_SRC_DIR $PLUGIN_DEST_DIR" -u $FTP_USERNAME,$FTP_PASSWORD $PLUGIN_HOSTNAME
