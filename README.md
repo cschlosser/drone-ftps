@@ -44,8 +44,8 @@ pipeline:
     image: cschlosser/drone-ftps
     hostname: example.com:21
     secrets: [ ftp_username, ftp_password ]
-    secure: true | false # true = use FTP(S), false = FTP without SSL
-    verify: true | false # true = strong SSL verification, false = supress SSL versification error
+    secure: true (default) | false # true = use FTP(S), false = FTP without SSL
+    verify: true (default) | false # true = strong SSL verification, false = supress SSL verification error
     dest_dir: /var/www/mysite
     src_dir: /mysite/static
     exclude:
