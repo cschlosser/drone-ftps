@@ -35,7 +35,7 @@ for i in "${in_arr[@]}"; do
 done
 IFS=',' read -ra in_arr <<< "$PLUGIN_INCLUDE"
 for i in "${in_arr[@]}"; do
-    PLUGIN_INCLUDE_STR="$PLUGIN_INCLUDE_STR -x $i"
+    PLUGIN_INCLUDE_STR="$PLUGIN_INCLUDE_STR -i $i"
 done
 
 lftp -e "set xfer:log 1; \
