@@ -29,7 +29,10 @@ fi
 if [ -z "$PLUGIN_CHMOD" ]; then
     PLUGIN_CHMOD=""
 else
-    PLUGIN_CHMOD="-p"
+    if [ "$PLUGIN_CHMOD" = true ]; then
+        PLUGIN_CHMOD="-p"
+    else
+        PLUGIN_CHMOD=""
 fi
 
 PLUGIN_EXCLUDE_STR=""
