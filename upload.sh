@@ -33,6 +33,7 @@ else
         PLUGIN_CHMOD="-p"
     else
         PLUGIN_CHMOD=""
+    fi
 fi
 
 PLUGIN_EXCLUDE_STR=""
