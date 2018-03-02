@@ -30,9 +30,9 @@ if [ -z "$PLUGIN_CHMOD" ]; then
     PLUGIN_CHMOD=""
 else
     if [ "$PLUGIN_CHMOD" = true ]; then
-        PLUGIN_CHMOD="-p"
-    else
         PLUGIN_CHMOD=""
+    else
+        PLUGIN_CHMOD="-p"
     fi
 fi
 
