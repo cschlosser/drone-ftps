@@ -52,14 +52,15 @@ if [ -z "$PLUGIN_DELETE_DIR" ] && [ "$PLUGIN_DELETE_DIR" = true ]; then
     PLUGIN_DELETE_DIR="rm -r $PLUGIN_DEST_DIR"
 else
     PLUGIN_DELETE_DIR=""
+    echo "hi"
 fi
 
-lftp -e "$PLUGIN_DELETE_DIR; \
-  set xfer:log 1; \
+lftp -e "set xfer:log 1; \
   set ftp:ssl-allow $PLUGIN_SECURE; \
   set ftp:ssl-force $PLUGIN_SECURE; \
   set ftp:ssl-protect-data $PLUGIN_SECURE; \
   set ssl:verify-certificate $PLUGIN_VERIFY; \
   set ssl:check-hostname $PLUGIN_VERIFY; \
+  $PLUGIN_DELETE_DIR; \
   mirror --verbose $PLUGIN_CHMOD -R $PLUGIN_INCLUDE_STR $PLUGIN_EXCLUDE_STR $(pwd)$PLUGIN_SRC_DIR $PLUGIN_DEST_DIR" \
   -u $FTP_USERNAME,$FTP_PASSWORD $PLUGIN_HOSTNAME
