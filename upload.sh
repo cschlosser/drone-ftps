@@ -32,6 +32,12 @@ else
     PLUGIN_CHMOD=""
 fi
 
+if [ "$PLUGIN_CLEAN_DIR" = true ]; then
+    PLUGIN_CLEAN_DIR="rm -r $PLUGIN_DEST_DIR"
+else
+    PLUGIN_CLEAN_DIR=""
+fi
+
 PLUGIN_EXCLUDE_STR=""
 PLUGIN_INCLUDE_STR=""
 
@@ -43,12 +49,6 @@ IFS=',' read -ra in_arr <<< "$PLUGIN_INCLUDE"
 for i in "${in_arr[@]}"; do
     PLUGIN_INCLUDE_STR="$PLUGIN_INCLUDE_STR -i $i"
 done
-
-if [ "$PLUGIN_CLEAN_DIR" = true ]; then
-    PLUGIN_CLEAN_DIR="rm -r $PLUGIN_DEST_DIR"
-else
-    PLUGIN_CLEAN_DIR=""
-fi
 
 lftp -e "set xfer:log 1; \
   set ftp:ssl-allow $PLUGIN_SECURE; \
