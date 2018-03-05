@@ -26,14 +26,10 @@ if [ -z "$PLUGIN_SRC_DIR" ]; then
     PLUGIN_SRC_DIR="/"
 fi
 
-if [ -z "$PLUGIN_CHMOD" ]; then
-    PLUGIN_CHMOD=""
+if [ "$PLUGIN_CHMOD" = false ]; then
+    PLUGIN_CHMOD="-p"
 else
-    if [ "$PLUGIN_CHMOD" = true ]; then
-        PLUGIN_CHMOD=""
-    else
-        PLUGIN_CHMOD="-p"
-    fi
+    PLUGIN_CHMOD=""
 fi
 
 PLUGIN_EXCLUDE_STR=""
