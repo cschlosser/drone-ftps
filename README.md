@@ -47,6 +47,7 @@ pipeline:
     secure: true (default) | false # true = use FTP(S), false = FTP without SSL
     verify: true (default) | false # true = strong SSL verification, false = supress SSL verification error
     chmod: true (default) | false # true = chmod after file transferred, false = no chmod after file transferred
+    clean_dir: true | false (default) # true = clean destination directory before transferring files, false = don't clean
     dest_dir: /var/www/mysite
     src_dir: /mysite/static
     exclude:

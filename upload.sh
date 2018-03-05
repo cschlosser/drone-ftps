@@ -44,10 +44,10 @@ for i in "${in_arr[@]}"; do
     PLUGIN_INCLUDE_STR="$PLUGIN_INCLUDE_STR -i $i"
 done
 
-if [ "$PLUGIN_DELETE_DIR" = true ]; then
-    PLUGIN_DELETE_DIR="rm -r $PLUGIN_DEST_DIR"
+if [ "$PLUGIN_CLEAN_DIR" = true ]; then
+    PLUGIN_CLEAN_DIR="rm -r $PLUGIN_DEST_DIR"
 else
-    PLUGIN_DELETE_DIR=""
+    PLUGIN_CLEAN_DIR=""
 fi
 
 lftp -e "set xfer:log 1; \
@@ -56,6 +56,6 @@ lftp -e "set xfer:log 1; \
   set ftp:ssl-protect-data $PLUGIN_SECURE; \
   set ssl:verify-certificate $PLUGIN_VERIFY; \
   set ssl:check-hostname $PLUGIN_VERIFY; \
-  $PLUGIN_DELETE_DIR; \
+  $PLUGIN_CLEAN_DIR; \
   mirror --verbose $PLUGIN_CHMOD -R $PLUGIN_INCLUDE_STR $PLUGIN_EXCLUDE_STR $(pwd)$PLUGIN_SRC_DIR $PLUGIN_DEST_DIR" \
   -u $FTP_USERNAME,$FTP_PASSWORD $PLUGIN_HOSTNAME
