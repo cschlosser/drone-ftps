@@ -49,10 +49,13 @@ for i in "${in_arr[@]}"; do
 done
 
 if [ -z "$PLUGIN_DELETE_DIR" ] && [ "$PLUGIN_DELETE_DIR" = true ]; then
-    lftp -e 'rm -r $PLUGIN_DEST_DIR' -u $FTP_USERNAME,$FTP_PASSWORD $PLUGIN_HOSTNAME
+    PLUGIN_DELETE_DIR="rm -r $PLUGIN_DEST_DIR"
+else
+    PLUGIN_DELETE_DIR=""
 fi
 
-lftp -e "set xfer:log 1; \
+lftp -e "$PLUGIN_DELETE_DIR; \
+  set xfer:log 1; \
   set ftp:ssl-allow $PLUGIN_SECURE; \
   set ftp:ssl-force $PLUGIN_SECURE; \
   set ftp:ssl-protect-data $PLUGIN_SECURE; \
