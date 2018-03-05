@@ -48,11 +48,10 @@ for i in "${in_arr[@]}"; do
     PLUGIN_INCLUDE_STR="$PLUGIN_INCLUDE_STR -i $i"
 done
 
-if [ -z "$PLUGIN_DELETE_DIR" ] && [ "$PLUGIN_DELETE_DIR" = true ]; then
+if [ "$PLUGIN_DELETE_DIR" = true ]; then
     PLUGIN_DELETE_DIR="rm -r $PLUGIN_DEST_DIR"
 else
     PLUGIN_DELETE_DIR=""
-    echo "hi"
 fi
 
 lftp -e "set xfer:log 1; \
