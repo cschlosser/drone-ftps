@@ -26,14 +26,16 @@ if [ -z "$PLUGIN_SRC_DIR" ]; then
     PLUGIN_SRC_DIR="/"
 fi
 
-if [ -z "$PLUGIN_CHMOD" ]; then
-    PLUGIN_CHMOD=""
+if [ "$PLUGIN_CHMOD" = false ]; then
+    PLUGIN_CHMOD="-p"
 else
-    if [ "$PLUGIN_CHMOD" = true ]; then
-        PLUGIN_CHMOD=""
-    else
-        PLUGIN_CHMOD="-p"
-    fi
+    PLUGIN_CHMOD=""
+fi
+
+if [ "$PLUGIN_CLEAN_DIR" = true ]; then
+    PLUGIN_CLEAN_DIR="rm -r $PLUGIN_DEST_DIR"
+else
+    PLUGIN_CLEAN_DIR=""
 fi
 
 PLUGIN_EXCLUDE_STR=""
@@ -54,5 +56,6 @@ lftp -e "set xfer:log 1; \
   set ftp:ssl-protect-data $PLUGIN_SECURE; \
   set ssl:verify-certificate $PLUGIN_VERIFY; \
   set ssl:check-hostname $PLUGIN_VERIFY; \
+  $PLUGIN_CLEAN_DIR; \
   mirror --verbose $PLUGIN_CHMOD -R $PLUGIN_INCLUDE_STR $PLUGIN_EXCLUDE_STR $(pwd)$PLUGIN_SRC_DIR $PLUGIN_DEST_DIR" \
   -u $FTP_USERNAME,$FTP_PASSWORD $PLUGIN_HOSTNAME
