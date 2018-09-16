@@ -33,7 +33,7 @@ else
 fi
 
 if [ "$PLUGIN_ONLY_NEWER" = true ]; then
-    PLUGIN_ONLY_NEWER="-n"
+    PLUGIN_ONLY_NEWER="-ne"
 else
     PLUGIN_ONLY_NEWER=""
 fi
