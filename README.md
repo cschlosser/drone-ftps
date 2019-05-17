@@ -9,8 +9,7 @@
 
 You have to set the username and password for your FTP server in the `FTP_USERNAME` and `FTP_PASSWORD` secret.
 
-
-## Optional settings
+## Required settings
 
 ```yaml
 environment:
@@ -19,6 +18,12 @@ environment:
     FTP_PASSWORD:
       from_secret: password
     PLUGIN_HOSTNAME: example.com:21
+```
+
+## Optional settings
+
+```yaml
+environment:
     PLUGIN_DEST_DIR: /path/to/dest (default /)
     PLUGIN_SRC_DIR: /path/to/dest (default ./)
     PLUGIN_SECURE: true | false (default true)
