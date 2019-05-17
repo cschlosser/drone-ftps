@@ -9,53 +9,64 @@
 
 You have to set the username and password for your FTP server in the `FTP_USERNAME` and `FTP_PASSWORD` secret.
 
-### Basic
+
+## Optional settings
 
 ```yaml
-pipeline:
-  deploy:
-    image: cschlosser/drone-ftps
-    hostname: example.com:21
-    secrets: [ ftp_username, ftp_password ]
+environment:
+    FTP_USERNAME:
+      from_secret: username
+    FTP_PASSWORD:
+      from_secret: password
+    PLUGIN_HOSTNAME: example.com:21
+    PLUGIN_DEST_DIR: /path/to/dest (default /)
+    PLUGIN_SRC_DIR: /path/to/dest (default ./)
+    PLUGIN_SECURE: true | false (default true)
+    PLUGIN_VERIFY: false
+    PLUGIN_EXCLUDE: (egrep like pattern matching)
+    PLUGIN_INCLUDE: (egrep like pattern matching)
 ```
 
-### Optional settings
+## Full file example
 
 ```yaml
-secure: true | false (default true)
+kind: pipeline
+name: default
 
-dest_dir: /path/to/dest (default /)
+steps:
+- name: master_build
+  image: cschlosser/drone-ftps
+  environment:
+    FTP_USERNAME:
+      from_secret: username
+    FTP_PASSWORD:
+      from_secret: password
+    PLUGIN_HOSTNAME: example.com:21
 
-src_dir: /path/to/src (default ./)
+    PLUGIN_SECURE: false
+    PLUGIN_VERIFY: false
+    PLUGIN_EXCLUDE: ^\.git/$
+  when:
+    branch:
+    - master
+    event:
+    - push
 
-exclude: (egrep like pattern matching)
-  - ^\.git/$
-  - ^\.gitignore$
-  - ^\.drone.yml$
-
-include: like exclude
-```
-
-Full file:
-
-```yaml
-pipeline:
-  deploy:
-    image: cschlosser/drone-ftps
-    hostname: example.com:21
-    secrets: [ ftp_username, ftp_password ]
-    secure: true (default) | false # true = use FTP(S), false = FTP without SSL
-    verify: true (default) | false # true = strong SSL verification, false = supress SSL verification error
-    chmod: true (default) | false # true = chmod after file transferred, false = no chmod after file transferred
-    clean_dir: true | false (default) # true = clean destination directory before transferring files, false = don't clean
-    dest_dir: /var/www/mysite
-    src_dir: /mysite/static
-    exclude:
-      - ^\.git/$
-      - ^\.gitignore$
-      - ^\.drone.yml$
-    include:
-      - ^*.css$
-      - ^*.js$
-      - ^*.html$
+- name: develop_build
+  image: cschlosser/drone-ftps
+  environment:
+    FTP_USERNAME:
+      from_secret: username
+    FTP_PASSWORD:
+      from_secret: password
+    PLUGIN_HOSTNAME: example.com:21
+    PLUGIN_DEST_DIR: /develop
+    PLUGIN_SECURE: false
+    PLUGIN_VERIFY: false
+    PLUGIN_EXCLUDE: ^\.git/$
+  when:
+    branch:
+    - develop
+    event:
+    - push
 ```
