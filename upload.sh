@@ -43,11 +43,11 @@ PLUGIN_INCLUDE_STR=""
 
 IFS=',' read -ra in_arr <<< "$PLUGIN_EXCLUDE"
 for i in "${in_arr[@]}"; do
-    PLUGIN_EXCLUDE_STR="$PLUGIN_EXCLUDE_STR -x $i"
+    PLUGIN_EXCLUDE_STR="$PLUGIN_EXCLUDE_STR -x '$i'"
 done
 IFS=',' read -ra in_arr <<< "$PLUGIN_INCLUDE"
 for i in "${in_arr[@]}"; do
-    PLUGIN_INCLUDE_STR="$PLUGIN_INCLUDE_STR -i $i"
+    PLUGIN_INCLUDE_STR="$PLUGIN_INCLUDE_STR -i '$i'"
 done
 
 lftp -e "set xfer:log 1; \
