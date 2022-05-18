@@ -30,6 +30,10 @@ environment:
     PLUGIN_VERIFY: false
     PLUGIN_EXCLUDE: (egrep like pattern matching)
     PLUGIN_INCLUDE: (egrep like pattern matching)
+    PLUGIN_CHMOD: true | false (default true)
+    PLUGIN_CLEAN_DIR: true | false (default false)
+    PLUGIN_AUTO_CONFIRM: true | false (default false)
+    PLUGIN_DEBUG: true | false (default false)
 ```
 
 ## Full file example
