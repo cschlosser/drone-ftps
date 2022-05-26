@@ -38,6 +38,18 @@ else
     PLUGIN_CLEAN_DIR=""
 fi
 
+if [ -z "$PLUGIN_DEBUG" ]; then
+    PLUGIN_DEBUG=""
+else
+    PLUGIN_DEBUG="-d"
+fi
+
+if [ -n "$PLUGIN_AUTO_CONFIRM" ]; then
+    PLUGIN_AUTO_CONFIRM="true"
+else
+    PLUGIN_AUTO_CONFIRM="false"
+fi
+
 PLUGIN_EXCLUDE_STR=""
 PLUGIN_INCLUDE_STR=""
 
@@ -50,10 +62,11 @@ for i in "${in_arr[@]}"; do
     PLUGIN_INCLUDE_STR="$PLUGIN_INCLUDE_STR -i '$i'"
 done
 
-lftp -e "set xfer:log 1; \
+lftp $PLUGIN_DEBUG -e "set xfer:log 1; \
   set ftp:ssl-allow $PLUGIN_SECURE; \
   set ftp:ssl-force $PLUGIN_SECURE; \
   set ftp:ssl-protect-data $PLUGIN_SECURE; \
+  set sftp:auto-confirm $PLUGIN_AUTO_CONFIRM; \
   set ssl:verify-certificate $PLUGIN_VERIFY; \
   set ssl:check-hostname $PLUGIN_VERIFY; \
   set net:max-retries 3; \
