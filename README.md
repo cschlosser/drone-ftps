@@ -1,9 +1,9 @@
 # Deploy to FTP(S) server from Drone CI
 
-[![Docker Stars](https://img.shields.io/docker/stars/cschlosser/drone-ftps.svg)](https://hub.docker.com/r/cschlosser/drone-ftps/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/cschlosser/drone-ftps.svg)](https://hub.docker.com/r/cschlosser/drone-ftps/)
-[![Docker Build](https://img.shields.io/docker/build/cschlosser/drone-ftps.svg)](https://hub.docker.com/r/cschlosser/drone-ftps/)
-[![Docker Layers](https://images.microbadger.com/badges/image/cschlosser/drone-ftps.svg)](https://hub.docker.com/r/cschlosser/drone-ftps/)
+[![Docker Stars](https://badgen.net/docker/stars/cschlosser/drone-ftps)](https://hub.docker.com/r/cschlosser/drone-ftps/)
+[![Docker Pulls](https://badgen.net/docker/pulls/cschlosser/drone-ftps)](https://hub.docker.com/r/cschlosser/drone-ftps/)
+[![Docker Build](https://img.shields.io/docker/cloud/build/cschlosser/drone-ftps)](https://hub.docker.com/r/cschlosser/drone-ftps/)
+[![Docker Size](https://badgen.net/docker/size/cschlosser/drone-ftps)](https://hub.docker.com/r/cschlosser/drone-ftps/)
 
 ## Usage
 
