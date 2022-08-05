@@ -50,6 +50,10 @@ else
     PLUGIN_AUTO_CONFIRM="false"
 fi
 
+if [ "$PLUGIN_SSH_ACCEPT_RSA" = true ]; then
+  echo "HostKeyAlgorithms ssh-rsa" > ~/.ssh/config && echo "PubkeyAcceptedKeyTypes ssh-rsa" >> ~/.ssh/config && chmod 600 ~/.ssh/config
+fi;
+
 PLUGIN_EXCLUDE_STR=""
 PLUGIN_INCLUDE_STR=""
 
