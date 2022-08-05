@@ -7,6 +7,6 @@ RUN apk --no-cache add \
         bash
 
 ADD upload.sh /bin/
-RUN chmod +x /bin/upload.sh
+RUN chmod +x /bin/upload.sh && mkdir ~/.ssh && chmod 700 ~/.ssh
 
 ENTRYPOINT /bin/upload.sh
