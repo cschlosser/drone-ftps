@@ -34,6 +34,8 @@ environment:
     PLUGIN_CLEAN_DIR: true | false (default false)
     PLUGIN_AUTO_CONFIRM: true | false (default false)
     PLUGIN_SSH_ACCEPT_RSA: true | false (default false)
+    PLUGIN_PRE_ACTION: string (default empty, example: mv /dest/logs /temp/logs)
+    PLUGIN_POST_ACTION: string (default empty, example: mv /temp/logs /dest/logs)
     PLUGIN_DEBUG: true | false (default false)
 ```
 
