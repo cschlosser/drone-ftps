@@ -33,6 +33,7 @@ environment:
     PLUGIN_CHMOD: true | false (default true)
     PLUGIN_CLEAN_DIR: true | false (default false)
     PLUGIN_AUTO_CONFIRM: true | false (default false)
+    PLUGIN_SSH_ACCEPT_RSA: true | false (default false)
     PLUGIN_DEBUG: true | false (default false)
 ```
 
