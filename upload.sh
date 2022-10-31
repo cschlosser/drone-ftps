@@ -32,6 +32,12 @@ else
     PLUGIN_CHMOD=""
 fi
 
+if [ "$PLUGIN_ONLY_NEWER" = true ]; then
+    PLUGIN_ONLY_NEWER="-e -n --ignore-time"
+else
+    PLUGIN_ONLY_NEWER=""
+fi
+
 if [ "$PLUGIN_CLEAN_DIR" = true ]; then
     PLUGIN_CLEAN_DIR="rm -r $PLUGIN_DEST_DIR"
 else
@@ -76,6 +82,6 @@ lftp $PLUGIN_DEBUG -e "set xfer:log 1; \
   set net:max-retries 3; \
   $PLUGIN_PRE_ACTION; \
   $PLUGIN_CLEAN_DIR; \
-  mirror --verbose $PLUGIN_CHMOD -R $PLUGIN_MIRROR_OPTS $PLUGIN_INCLUDE_STR $PLUGIN_EXCLUDE_STR $(pwd)$PLUGIN_SRC_DIR $PLUGIN_DEST_DIR; \
+  mirror --verbose $PLUGIN_CHMOD -R $PLUGIN_ONLY_NEWER $PLUGIN_MIRROR_OPTS $PLUGIN_INCLUDE_STR $PLUGIN_EXCLUDE_STR $(pwd)$PLUGIN_SRC_DIR $PLUGIN_DEST_DIR; \
   $PLUGIN_POST_ACTION;" \
   -u $FTP_USERNAME,$FTP_PASSWORD $PLUGIN_HOSTNAME
