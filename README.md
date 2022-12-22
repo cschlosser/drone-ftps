@@ -32,6 +32,7 @@ environment:
     PLUGIN_INCLUDE: (egrep like pattern matching)
     PLUGIN_CHMOD: true | false (default true)
     PLUGIN_CLEAN_DIR: true | false (default false)
+    PLUGIN_ONLY_NEWER: true | false (default false)
     PLUGIN_AUTO_CONFIRM: true | false (default false)
     PLUGIN_SSH_ACCEPT_RSA: true | false (default false)
     PLUGIN_PRE_ACTION: string (default empty)
@@ -44,13 +45,22 @@ The `PLUGIN_PRE_ACTION` is executed *before* the `PLUGIN_CLEAN_DIR` (if set).
 The `PLUGIN_POST_ACTION` is executed *after* the ftp "mirror" operation.  
 
 Multiple Actions can be set, they need to be divided by a semicolon `;` .  
-**Example:**  
+#### Example:
 There is another project's folder ("project2") in a subfolder in the destination directory. We need to move this folder to a temporary location and restore it after the upload completed.
 ```yaml
 PLUGIN_CLEAN_DIR: true
 PLUGIN_PRE_ACTION: mv /dest/project2 /temp/project2;
 PLUGIN_POST_ACTION: mv /temp/project2 /dest/project2;
 ```
+
+### Transfer only newer files
+The setting `PLUGIN_ONLY_NEWER: true` (only transfer newer files) does not mix well with the `PLUGIN_CLEAN_DIR: true` (clean destination directory before transfer).
+
+When setting `PLUGIN_ONLY_NEWER: true` parameter to true, make sure to _exclude_ any files/folders that are not present in the source directory, but should be kept on the server.  
+#### Example:
+Source folder does not contain an `.env` file, it exists on the remote server and should be kept.  
+Also, we do not want to transfer the source's `.git` folder and `.gitignore` file:  
+Set `PLUGIN_ONLY_NEWER: true` and `PLUGIN_EXCLUDE: ^\.git/$,^\.gitignore$,^\.env$` environment variables.
 
 ## Full file example
 
